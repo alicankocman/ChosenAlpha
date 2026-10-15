@@ -1,0 +1,3 @@
+- Keep the launch experience in a browser-safe component with local phase state; the one-page interaction needs no server or persistence.
+- Render the alpha and its clipped shatter fragments as SVG with CSS transform animations; lightweight vector layers preserve performance and reduced-motion accessibility.
+- Define cinematic styles, color tokens, and button variants in the shared design system; page components only supply animation geometry.
