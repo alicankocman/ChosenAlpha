@@ -11,6 +11,10 @@ import {
 import type { ReactNode } from "react";
 
 import appCss from "../styles.css?url";
+import { buildSeoHead, buildSiteHead } from "@/lib/seo";
+
+const siteHead = buildSiteHead();
+const fallbackSeo = buildSeoHead();
 
 function NotFoundComponent() {
   return (
@@ -71,23 +75,15 @@ function ErrorComponent({ error, reset }: ErrorComponentProps) {
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   head: () => ({
-    meta: [
-      { charSet: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "ChosenAlpha" },
-      { name: "description", content: "ChosenAlpha — A new era awaits." },
-      { name: "author", content: "Alican Koçman" },
-      { property: "og:title", content: "ChosenAlpha" },
-      { property: "og:description", content: "ChosenAlpha — A new era awaits." },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
+    // Site-wide tags plus a fallback title/description/social card for routes that
+    // don't define their own (child routes override by meta name/property).
+    meta: [...siteHead.meta, ...fallbackSeo.meta],
     links: [
       {
         rel: "stylesheet",
         href: appCss,
       },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      ...siteHead.links,
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" },

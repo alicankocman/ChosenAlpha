@@ -57,6 +57,12 @@ npm test           # run the test suite
 npm run lint       # eslint
 ```
 
+## SEO
+
+All metadata lives in `src/lib/seo.ts`. Routes call `buildSeoHead()` for title, description, canonical and Open Graph / Twitter cards; the root route adds the site-wide tags (icons, manifest, theme colour, Organization + WebSite JSON-LD). Static assets in `public/`: `robots.txt`, `sitemap.xml`, `site.webmanifest`, `og-image.png` (1200×630), `icon.svg`, `icon-192.png`, `icon-512.png`, `apple-touch-icon.png`.
+
+The canonical origin defaults to `https://www.chosenalpha.com`; override it with `VITE_SITE_URL` (e.g. for a staging host). Update `lastmod` in `sitemap.xml` and the URL in `robots.txt` if the domain changes.
+
 ## Forms
 
 The waitlist and contact forms submit to [Web3Forms](https://web3forms.com). Set `VITE_WEB3FORMS_ACCESS_KEY` in `.env` (see `.env.example`). `.env` is gitignored and must not be committed. On your host (Vercel, Cloudflare, etc.), add the same variable in the deployment environment settings.
