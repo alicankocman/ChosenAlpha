@@ -74,6 +74,8 @@ export function LaunchExperience() {
           <span className="orbit-coordinate">CA / 001</span>
         </div>
         <div className="silent-scene" aria-hidden={phase === "revealed"}>
+          {/* Crawlers never trigger the click, so the page needs a real H1 before the reveal. */}
+          {phase !== "revealed" && <h1 className="sr-only">ChosenAlpha — Something big is coming</h1>}
           <div className="scene-eyebrow">THE NEXT CHAPTER STARTS WITH YOU</div>
           <div className="symbol-space">
             <Button variant="symbol" size="stage" aria-label="Break the silence" disabled={phase !== "silent"} onClick={breakSilence}>
